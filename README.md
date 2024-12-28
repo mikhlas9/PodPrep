@@ -128,6 +128,180 @@ podprep/
 └── README.md
 ```
 
+## 🤝 Basic Implementation
+
+1. Backend
+```bash
+# backend/app/main.py
+
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+from typing import List, Optional
+import httpx
+import openai
+from datetime import datetime
+
+app = FastAPI()
+
+class GuestRequest(BaseModel):
+    name: str
+    social_handles: Optional[dict] = None
+
+class Question(BaseModel):
+    text: str
+    category: str
+    context: Optional[str] = None
+
+class GuestDossier(BaseModel):
+    name: str
+    summary: str
+    social_profiles: dict
+    recent_content: List[dict]
+    suggested_questions: List[Question]
+    generated_at: datetime
+
+async def fetch_social_data(name: str, handles: dict) -> dict:
+    """Fetch data from social media platforms."""
+    # In real implementation, use proper API clients
+    async with httpx.AsyncClient() as client:
+        twitter_data = None
+        linkedin_data = None
+        
+        if handles and handles.get("twitter"):
+            twitter_data = await client.get(
+                f"https://api.twitter.com/2/users/{handles['twitter']}"
+            )
+        
+        if handles and handles.get("linkedin"):
+            linkedin_data = await client.get(
+                f"https://api.linkedin.com/v2/people/{handles['linkedin']}"
+            )
+        
+        return {
+            "twitter": twitter_data,
+            "linkedin": linkedin_data
+        }
+
+async def generate_questions(context: str) -> List[Question]:
+    """Generate interview questions using OpenAI."""
+    prompt = f"""
+    Based on this context about a podcast guest, generate 5 unique and insightful
+    interview questions that haven't been commonly asked before:
+    
+    {context}
+    
+    Focus on their expertise and recent developments in their field.
+    """
+    
+    response = await openai.Completion.create(
+        engine="text-davinci-003",
+        prompt=prompt,
+        max_tokens=300,
+        temperature=0.7
+    )
+    
+    # Parse and structure the generated questions
+    questions = []
+    raw_questions = response.choices[0].text.strip().split("\n")
+    
+    for q in raw_questions:
+        if q.strip():
+            questions.append(Question(
+                text=q.strip(),
+                category="ai_generated",
+                context="Generated based on guest research"
+            ))
+    
+    return questions
+
+@app.post("/api/research/guest", response_model=GuestDossier)
+async def research_guest(request: GuestRequest):
+    """Generate a guest research dossier."""
+    try:
+        # Fetch social media data
+        social_data = await fetch_social_data(
+            request.name,
+            request.social_handles
+        )
+        
+        # Create guest summary
+        summary = f"Research results for {request.name}"
+        
+        # Generate interview questions
+        questions = await generate_questions(summary)
+        
+        # Compile dossier
+        dossier = GuestDossier(
+            name=request.name,
+            summary=summary,
+            social_profiles=social_data,
+            recent_content=[],  # Implement content fetching
+            suggested_questions=questions,
+            generated_at=datetime.utcnow()
+        )
+        
+        return dossier
+        
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+```
+
+2. Frontend
+```bash
+# frontend/components/GuestSearch.tsx
+
+import React, { useState } from 'react';
+import { useForm } from 'react-hook-form';
+
+interface GuestSearchProps {
+    onSearch: (data: any) => void;
+    isLoading: boolean;
+}
+
+export const GuestSearch: React.FC<GuestSearchProps> = ({ onSearch, isLoading }) => {
+    const { register, handleSubmit } = useForm();
+    
+    return (
+        <form onSubmit={handleSubmit(onSearch)} className="space-y-4">
+            <div>
+                <label className="block text-sm font-medium text-gray-700">
+                    Guest Name
+                </label>
+                <input
+                    type="text"
+                    {...register('name', { required: true })}
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+                    placeholder="Enter guest name"
+                />
+            </div>
+            
+            <div>
+                <label className="block text-sm font-medium text-gray-700">
+                    Twitter Handle (optional)
+                </label>
+                <input
+                    type="text"
+                    {...register('social_handles.twitter')}
+                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm"
+                    placeholder="@username"
+                />
+            </div>
+            
+            <button
+                type="submit"
+                disabled={isLoading}
+                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+            >
+                {isLoading ? 'Researching...' : 'Research Guest'}
+            </button>
+        </form>
+    );
+};
+```
+
+
+
+
 ## 🤝 Contributing
 
 1. Fork the repository
