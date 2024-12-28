@@ -109,6 +109,8 @@ npm run dev
 
 5. Open http://localhost:3000 in your browser
 
+---
+
 ## 🗄️ Project Structure
 ```bash
 podprep/
@@ -128,7 +130,8 @@ podprep/
 └── README.md
 ```
 
-##  Basic Implementation
+
+##  📘 Basic Implementation
 
 1. Backend
 ```bash
@@ -300,7 +303,8 @@ export const GuestSearch: React.FC<GuestSearchProps> = ({ onSearch, isLoading })
 ```
 ---
 
-## Explanation of the Code
+
+## 💻 Explanation of the Code
 
 This implementation consists of two parts:
 
@@ -329,6 +333,7 @@ This implementation consists of two parts:
        - Uses onSearch callback passed via props to handle form submission.
     - ### Loading State:
        - Disables the submit button and updates its text to "Researching..." while the API call is in progress.
+
 
 
 ## 🤝 Contributing
