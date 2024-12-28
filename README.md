@@ -69,3 +69,17 @@ PodPrep automates the research process and generates unique questions by:
 ```bash
 git clone https://github.com/mikhlas9/podprep.git
 cd podprep
+
+2. Set up backend
+```bash
+# Create and activate virtual environment
+cd backend
+python -m venv venv
+source venv/bin/activate  # or `venv\Scripts\activate` on Windows
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Set up environment variables
+cp .env.example .env
+# Edit .env with your API keys
