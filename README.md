@@ -133,7 +133,7 @@ podprep/
 ## 📸 Screenshots
 
 **Dashboard**
-![Image Description](https://imgur.com/a/ySIGlwm)
+![Image Description]([https://imgur.com/a/ySIGlwm](https://i.imgur.com/ooCliEP.png))
 
 **Guest Research**
 ![Image Description](https://imgur.com/a/Ofd2XwT)
