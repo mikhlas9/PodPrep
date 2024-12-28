@@ -130,6 +130,17 @@ podprep/
 └── README.md
 ```
 
+## 📸 Screenshots
+
+**Dashboard**
+![Image Description](https://imgur.com/a/ySIGlwm)
+
+**Guest Research**
+![Image Description](https://imgur.com/a/Ofd2XwT)
+
+**Question Generator**
+![Image Description](https://imgur.com/a/wq7ZleA)
+
 
 ##  📘 Basic Implementation
 
