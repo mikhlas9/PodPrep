@@ -108,3 +108,32 @@ npm run dev
 ```
 
 5. Open http://localhost:3000 in your browser
+
+## 🗄️ Project Structure
+```bash
+podprep/
+├── backend/
+│   ├── app/
+│   │   ├── api/
+│   │   ├── core/
+│   │   ├── services/
+│   │   └── utils/
+│   ├── requirements.txt
+│   └── main.py
+├── frontend/
+│   ├── components/
+│   ├── pages/
+│   ├── public/
+│   └── styles/
+└── README.md
+```
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch (git checkout -b feature/amazing-feature)
+3. Commit your changes (git commit -m 'Add some amazing feature')
+4. Push to the branch (git push origin feature/amazing-feature)
+4. Open a Pull Request
+
+
