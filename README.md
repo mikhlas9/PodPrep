@@ -311,13 +311,13 @@ This implementation consists of two parts:
 ### 1. Backend API (`main.py` in FastAPI):
 - Provides an endpoint (`/api/research/guest`) to generate a "Guest Dossier" for podcast hosts
 - It uses the following functionalities:
-  - ### Social Media Data Fetching (`fetch_social_data`):
+  - **Social Media Data Fetching (`fetch_social_data`):**
      - Connects to Twitter and LinkedIn APIs to retrieve guest data.
      - This is a placeholder and requires actual API credentials and responses to work.
-  - ### AI-Powered Question Generation (`generate_questions`):
+  - **AI-Powered Question Generation (`generate_questions`):**
       - Uses OpenAI API to generate a list of unique, insightful questions based on the guest's context (e.g., their summary).
       - Parses the AI-generated questions and structures them into the Question model.
-  - ### Dossier Compilation:
+  - **Dossier Compilation:**
       - Combines the guest's social media data, a research summary, and AI-generated questions into a GuestDossier.
       - Returns the dossier as the API response.
  - Error Handling:
@@ -326,12 +326,12 @@ This implementation consists of two parts:
 ### 2. Frontend Component (`GuestSearch.tsx` in React):
  - Provides a user interface for podcast hosts to input guest details and trigger the dossier generation.
  - Key Features:
-    - ### Form Fields:
+    - **Form Fields:**
        - Input for the guest's name (required).
        - Optional input for the guest's Twitter handle.
-    - ### Submit Handler:
+    - **Submit Handler:**
        - Uses onSearch callback passed via props to handle form submission.
-    - ### Loading State:
+    - **Loading State:**
        - Disables the submit button and updates its text to "Researching..." while the API call is in progress.
 
 
