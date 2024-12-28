@@ -69,6 +69,7 @@ PodPrep automates the research process and generates unique questions by:
 ```bash
 git clone https://github.com/mikhlas9/podprep.git
 cd podprep
+```
 
 2. Set up backend
 ```bash
