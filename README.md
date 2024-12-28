@@ -136,10 +136,10 @@ podprep/
 ![Image Description](https://i.imgur.com/ooCliEP.png)
 
 **Guest Research**
-![Image Description](https://imgur.com/a/Ofd2XwT)
+![Image Description](https://i.imgur.com/yx7xQth.png)
 
 **Question Generator**
-![Image Description](https://imgur.com/a/wq7ZleA)
+![Image Description](https://i.imgur.com/ibutoTf.png)
 
 
 ##  📘 Basic Implementation
