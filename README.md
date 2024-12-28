@@ -128,7 +128,7 @@ podprep/
 └── README.md
 ```
 
-## 🤝 Basic Implementation
+##  Basic Implementation
 
 1. Backend
 ```bash
@@ -299,6 +299,53 @@ export const GuestSearch: React.FC<GuestSearchProps> = ({ onSearch, isLoading })
 };
 ```
 
+## Explanation of the Code
+
+# Podcast Guest Research System
+
+This project consists of two main components: a backend API (FastAPI) and a frontend (React) to generate a comprehensive "Guest Dossier" for podcast hosts. The system integrates social media data fetching and AI-powered question generation to assist in preparing for guest interviews.
+
+---
+
+## Backend API (FastAPI)
+
+The backend provides an endpoint to generate a "Guest Dossier" containing a summary of the guest, their social media profiles, and AI-generated interview questions.
+
+### Features
+
+1. **Social Media Data Fetching (`fetch_social_data`)**:
+   - Connects to Twitter and LinkedIn APIs to retrieve guest data.
+   - **Note**: The current implementation is a placeholder and requires valid API credentials and integration.
+
+2. **AI-Powered Question Generation (`generate_questions`)**:
+   - Leverages the OpenAI API to generate unique and insightful interview questions based on the guest's context (e.g., their research summary).
+   - The questions are parsed and structured into the `Question` model.
+
+3. **Dossier Compilation**:
+   - Combines:
+     - The guest's social media data.
+     - A summary of their profile.
+     - AI-generated questions.
+   - Outputs this as a `GuestDossier` object.
+
+4. **Error Handling**:
+   - Wraps all critical operations in a `try-except` block.
+   - Returns an HTTP 500 error with the exception details if any operation fails.
+
+### API Endpoint
+
+#### **POST** `/api/research/guest`
+Generates a research dossier for a given guest.
+
+**Request Body**:
+```json
+{
+  "name": "Guest Name",
+  "social_handles": {
+    "twitter": "twitter_username",
+    "linkedin": "linkedin_username"
+  }
+}
 
 
 
