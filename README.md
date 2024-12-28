@@ -84,3 +84,27 @@ pip install -r requirements.txt
 # Set up environment variables
 cp .env.example .env
 # Edit .env with your API keys
+```
+
+3. Set up frontend
+```bash
+cd frontend
+npm install
+
+# Set up environment variables
+cp .env.example .env.local
+# Edit .env.local with your API keys
+```
+
+4. Start development servers
+```bash
+# Terminal 1 - Backend
+cd backend
+uvicorn main:app --reload
+
+# Terminal 2 - Frontend
+cd frontend
+npm run dev
+```
+
+5. Open http://localhost:3000 in your browser
